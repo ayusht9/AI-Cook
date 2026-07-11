@@ -1,0 +1,36 @@
+i want web app
+
+its a,
+
+A cooking to-do list
+Build a simple Ai micro-app that helps a user generate a personal cooking to-do list
+based on their day.
+A structured meal planning flow that produces:
+- Breakfast/Lunch/Dinner plan
+- grocery list
+- Substitutions
+- budget feasibility logic
+
+
+input: take input users schedule and then generate plan
+a longer or physical intensive day will have more calories
+gym day will have protein intensive diet
+please adjust accordingly
+also please input if a user is vegeterian or non vegeterian
+what would they like if non veg
+indian pricing
+3 choices
+after selecting choice thne generate grocesy list
+take into account user's budget, actually do it first and also after words when they want changes
+
+output: plan
+"i dont want hardcoded data"
+use small ai model: for generating
+have history: use sql lite
+have authentication: login/register
+make it accessible (dark/light theme, voice reader, responsive/font size changing wont break ui)
+small test cases if possible
+have loggin for debugging
+
+
+please commit after adding each feature

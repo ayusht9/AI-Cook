@@ -1,0 +1,46 @@
+github link
+deployed link
+have a readme section
+mention genai services
+key solution
+
+evaluation framewrok:
+
+platform will give score (code assesssment)
+
+code quality
+security
+efficiency
+testing
+accessibility
+problem statement alignment
+
+
+code quality: 
+security(authentication)
+efficiency
+testing(test cases)
+accessibility
+problem statement alignment
+
+high: code quality, problrm statement alignment
+midium:
+low: testing, accessibility
+
+3 attempts for code submission (all links)
+you'll get hints, what to improvise
+one retry attempt
+
+disqualification:
+
+donts:
+hardcoded/static pages
+mock or fake data
+hallucianate al responses
+false positive
+
+do:
+every feature must run
+working api
+dummy login credential
+test end to end
