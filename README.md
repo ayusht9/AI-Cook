@@ -3,8 +3,9 @@
 A fully serverless, dynamic AI-powered meal planner designed specifically for GitHub Pages deployment.
 
 ## Hackathon Links
-- **GitHub Repository**: [Insert GitHub Link Here]
-- **Deployed Link (GitHub Pages)**: [Insert Deployed Link Here]
+- **GitHub Repository**: [https://github.com/ayusht9/AI-Cook](https://github.com/ayusht9/AI-Cook)
+- **Deployed Link (Render - Full Backend)**: [https://ai-cook-rm5m.onrender.com/](https://ai-cook-rm5m.onrender.com/)
+- **Deployed Link (GitHub Pages - Static Fallback)**: [https://ayusht9.github.io/AI-Cook/](https://ayusht9.github.io/AI-Cook/)
 
 ## Key Solution 🗝️
 The core challenge was to build a robust, AI-powered meal planner that is entirely **serverless** (to allow free hosting on GitHub Pages) and highly personalized (schedule, budget, and dietary preferences).
