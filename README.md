@@ -19,6 +19,7 @@ We utilized **Transformers.js** (`@xenova/transformers`) as our GenAI service.
 By loading a lightweight model (`Xenova/LaMini-Flan-T5-77M`) in a dedicated Web Worker, we execute AI reasoning locally on the client's machine. This guarantees zero server costs, infinite scalability, and maximum data privacy. The AI output is used to dynamically inject creative context into our rigorously structured JSON meal planner logic.
 
 ## Features
+- **Fast Mode (Workaround)**: Local AI downloads can be slow on first load. Toggle "Fast Mode" to bypass the model and instantly generate structured plans using our internal logic engine.
 - **Dynamic Calorie Adjustment**: Caloric baseline changes automatically if your day is sedentary, moderate, or intense.
 - **Dietary Precision**: Fully supports vegetarian and specific non-vegetarian choices (e.g., Chicken, Fish).
 - **Budget Logic (INR)**: Generates 3 tiered choices (Budget Saver, Standard, Premium) based on your inputted budget, highlighting if a premium choice exceeds your limits.
