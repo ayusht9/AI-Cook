@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from './context/AuthContext';
 import { ThemeToggle } from './components/ThemeToggle';
 import { VoiceReader } from './components/VoiceReader';
-import { db } from './db';
 import { generateMealChoices } from './utils/parser';
 import { ChefHat, LogOut, Loader2, IndianRupee, Activity, Utensils, CheckCircle, Clock, Zap } from 'lucide-react';
 
@@ -18,7 +17,7 @@ function App() {
   const [diet, setDiet] = useState('veg');
   const [nonVegChoice, setNonVegChoice] = useState('');
   const [budget, setBudget] = useState(500);
-  const [fastMode, setFastMode] = useState(false); // Workaround for slow local model
+  const [fastMode, setFastMode] = useState(true); // Default to true as requested
 
   // AI State
   const worker = useRef(null);
@@ -59,8 +58,13 @@ function App() {
 
   const loadHistory = async () => {
     if (user) {
-      const items = await db.history.where('userId').equals(user.id).reverse().toArray();
-      setHistoryItems(items);
+      try {
+        const res = await fetch(`/api/history/${user.id}`);
+        const items = await res.json();
+        setHistoryItems(items);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
@@ -95,13 +99,21 @@ function App() {
 
   const selectPlan = async (plan) => {
     setSelectedPlan(plan);
-    // Save to history
-    await db.history.add({
-      userId: user.id,
-      timestamp: new Date().toISOString(),
-      prompt_details: { schedule, diet, budget },
-      generated_plan: plan
-    });
+    // Save to backend history
+    try {
+      await fetch('/api/history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: user.id,
+          timestamp: new Date().toISOString(),
+          prompt_details: { schedule, diet, budget },
+          generated_plan: plan
+        })
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleRegenerateFromHistory = (item) => {

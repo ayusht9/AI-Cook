@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { db } from '../db';
 
 const AuthContext = createContext();
 
@@ -8,33 +7,30 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is saved in localStorage (mock session)
-    const savedUserId = localStorage.getItem('userId');
-    if (savedUserId) {
-      db.users.get(parseInt(savedUserId)).then(foundUser => {
-        if (foundUser) {
-          setUser(foundUser);
-        }
-        setLoading(false);
-      });
-    } else {
-      setLoading(false);
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
     }
+    setLoading(false);
   }, []);
 
   const login = async (username) => {
-    // Mock login: find or create user
-    let existingUser = await db.users.where('username').equals(username).first();
-    if (!existingUser) {
-      const id = await db.users.add({ username });
-      existingUser = { id, username };
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username })
+      });
+      const data = await res.json();
+      localStorage.setItem('user', JSON.stringify(data));
+      setUser(data);
+    } catch (e) {
+      console.error(e);
     }
-    localStorage.setItem('userId', existingUser.id);
-    setUser(existingUser);
   };
 
   const logout = () => {
-    localStorage.removeItem('userId');
+    localStorage.removeItem('user');
     setUser(null);
   };
 
