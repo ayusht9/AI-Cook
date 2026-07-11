@@ -1,6 +1,6 @@
 # AI Cooking To-Do List
 
-A fully serverless, dynamic AI-powered meal planner designed specifically for GitHub Pages deployment.
+A dynamic, full-stack AI-powered meal planner built with Vite, React, Express, and SQLite.
 
 ## Hackathon Links
 - **GitHub Repository**: [https://github.com/ayusht9/AI-Cook](https://github.com/ayusht9/AI-Cook)
@@ -8,29 +8,25 @@ A fully serverless, dynamic AI-powered meal planner designed specifically for Gi
 - **Deployed Link (GitHub Pages - Static Fallback)**: [https://ayusht9.github.io/AI-Cook/](https://ayusht9.github.io/AI-Cook/)
 
 ## Key Solution 🗝️
-The core challenge was to build a robust, AI-powered meal planner that is entirely **serverless** (to allow free hosting on GitHub Pages) and highly personalized (schedule, budget, and dietary preferences).
+The core challenge was to build a robust, AI-powered meal planner that is highly personalized (schedule, budget, and dietary preferences) while remaining lightning-fast.
 
-Our key solution involves a **100% client-side architecture**:
-- **Database**: Instead of a traditional backend DB, we use **IndexedDB (via Dexie.js)** to persistently store user profiles and generation history directly in the browser.
-- **AI Inference**: Instead of paying for external API calls, we use **Transformers.js** to run a lightweight LLM/Text-Generation model directly in the user's browser via WebAssembly/WebGPU. 
-- **Accessibility & UX**: We implemented a pure Vanilla CSS glassmorphic design system with dark/light mode and a Web Speech API for reading plans aloud.
+Our solution involves a robust **Full-Stack Architecture**:
+- **Backend & Database**: An Express.js API powers the backend, seamlessly communicating with a real `better-sqlite3` SQLite database to persistently store user profiles and history.
+- **AI Inference (GenAI Services)**: We utilized **Transformers.js** (`@xenova/transformers`) running in a Web Worker on the client to generate contextually aware notes, paired with a blazing-fast internal logic engine to structure the JSON results perfectly without waiting on slow LLM outputs.
+- **Accessibility & UX**: We implemented a pure Vanilla CSS glassmorphic design system with a dark/light mode toggle and integrated the Web Speech API for reading plans aloud.
 
-## GenAI Services Used 🤖
-We utilized **Transformers.js** (`@xenova/transformers`) as our GenAI service. 
-By loading a lightweight model (`Xenova/LaMini-Flan-T5-77M`) in a dedicated Web Worker, we execute AI reasoning locally on the client's machine. This guarantees zero server costs, infinite scalability, and maximum data privacy. The AI output is used to dynamically inject creative context into our rigorously structured JSON meal planner logic.
-
-## Features
-- **Fast Mode (Workaround)**: Local AI downloads can be slow on first load. Toggle "Fast Mode" to bypass the model and instantly generate structured plans using our internal logic engine.
-- **Dynamic Calorie Adjustment**: Caloric baseline changes automatically if your day is sedentary, moderate, or intense.
-- **Dietary Precision**: Fully supports vegetarian and specific non-vegetarian choices (e.g., Chicken, Fish).
-- **Budget Logic (INR)**: Generates 3 tiered choices (Budget Saver, Standard, Premium) based on your inputted budget, highlighting if a premium choice exceeds your limits.
-- **Voice Reader**: Click "Listen" to have the browser read your meal plan out loud.
-- **History Tracking**: All generated and selected plans are saved offline to your IndexedDB.
+## Top 5 Features 🌟
+1. **Dynamic Generation**: Caloric baselines and protein macros adjust automatically depending on whether your daily schedule is sedentary, moderate, or intense.
+2. **Budget Feasibility (INR)**: Generates 3 tiered meal choices (Budget Saver, Standard, Premium) that actively calculate estimated grocery costs and warn you if a plan exceeds your budget.
+3. **Instant "Fast Mode"**: Bypasses heavy local AI weight downloads to instantly generate plans using our fallback logic, ensuring a flawless user experience even on slow internet connections.
+4. **Persistent History Tracking**: Every generated and selected plan is securely saved to your user profile in the SQLite database, allowing you to instantly view and **Regenerate** past meal plans.
+5. **Accessibility-First Design**: Fully responsive across devices with support for 200% font scaling, ARIA labels, and a built-in Voice Reader that reads your grocery list out loud.
 
 ## Local Setup
 1. Clone the repository.
 2. Run `npm install`
-3. Run `npm run dev`
-4. Run tests with `npx vitest`
+3. Run `npm run build`
+4. Run `npm start` (Starts the Express API and serves the production React build on `http://localhost:3000`)
+5. For frontend development, run `npm run dev`
 
 Enjoy your AI-generated meals!
